@@ -1,8 +1,8 @@
-import random
-from word import word_list
+from random_word import RandomWords
 
 def get_word():
-    word=random.choice(word_list)
+    r = RandomWords()
+    word = r.get_random_word()
     print(word)
     return word.upper()
 
@@ -18,7 +18,9 @@ def play(word):
     print(word_completion)
     print("\n")
     while not guessed and tries >0:
-        guess =input("Please guess a letter  or word :").upper()
+        guess = input("Please guess a letter  or word. (Type Stop to end) ").upper()
+        if guess == "STOP":
+            break
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
                 print("You already guessed the letter",guess)
@@ -134,7 +136,7 @@ def display_hangman(tries):
 def main():
         word=get_word()
         play(word)
-        while input("Play again ?").upper()=="Y":
+        while input("Play again? (Y/N) ").upper()=="Y":
             wrod= get_word()
             play(word)
 
