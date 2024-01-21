@@ -3,7 +3,6 @@ from random_word import RandomWords
 def get_word():
     r = RandomWords()
     word = r.get_random_word()
-    print(word)
     return word.upper()
 
 
@@ -18,18 +17,20 @@ def play(word):
     print(word_completion)
     print("\n")
     while not guessed and tries >0:
+        print(f"Letters gussed: {guessed_letters}")
+        print(f"Amount of tries left: {tries}")
         guess = input("Please guess a letter  or word. (Type Stop to end) ").upper()
         if guess == "STOP":
             break
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
-                print("You already guessed the letter",guess)
+                print(f"You already guessed the letter {guess}")
             elif guess not in word:
-                print(guess , "is not in the word .")
+                print(f"{guess} is not in the word .")
                 tries -=1
                 guessed_letters.append(guess)
             else:
-                print("Good job ",guess," is in the word" )
+                print(f"Good job , {guess}, is in the word" )
                 guessed_letters.append(guess)
                 word_as_list =list(word_completion)
                 indices =[i for i, letter in enumerate(word) if letter== guess]
@@ -41,9 +42,9 @@ def play(word):
 
         elif len(guess) ==len(word) and guess.isalpha():
             if guess in gussed_words:
-                print(" You have already guessed the word.",guess)
+                print(f" You have already guessed the word {guess}.")
             elif guess !=word:
-                print(guess ," is not the word.")
+                print(f"{guess}, is not the word.")
                 tries-=1
                 gussed_words.append(guess)
             else:
@@ -57,7 +58,7 @@ def play(word):
     if guessed:
         print("CONGRATS you guess the word correctly.")  
     else:
-        print("SORRY you ran out of tries. The word was "+word)
+        print(f"SORRY you ran out of tries. The word was {word}")
 
 def display_hangman(tries):
     stages = [  # final state: head, torso, both arms, and both legs
